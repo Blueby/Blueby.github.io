@@ -34,31 +34,83 @@
     var points = 0;
     var pointValue = 0;
     var wordChoice;
-    var compareStr = "FUCK";
+    var wordSelect = "FUCK";
     var result = "FUCK";
 
     function randWord() {
-      wordChoice = Math.floor((Math.random() * 5) + 1);
-      switch (wordChoice) {
-        case 1:
-          compareStr = "one";
-          break;
-        case 2:
-          compareStr = "two";
-          break;
-        case 3:
-          compareStr = "three";
-          break;
-        case 4:
-          compareStr = "four";
-          break;
-        case 5:
-          compareStr = "five";
-          break;
-        default:
-          document.write("FUCK");
+      wordChoice = Math.floor((Math.random() * 10) + 1);
+      if (points <= 600) {
+        switch (wordChoice) {
+          case 1:
+            wordSelect = "aid";
+            break;
+          case 2:
+            wordSelect = "she";
+            break;
+          case 3:
+            wordSelect = "the";
+            break;
+          case 4:
+            wordSelect = "yak";
+            break;
+          case 5:
+            wordSelect = "pot";
+            break;
+          case 6:
+            wordSelect = "pan";
+            break;
+          case 7:
+            wordSelect = "cat";
+            break;
+          case 8:
+            wordSelect = "blue";
+            break;
+          case 9:
+            wordSelect = "axel";
+            break;
+          case 10:
+            wordSelect = "mesh";
+            break;
+          default:
+            document.write("FUCK");
+        }
+      } else if (points <= 1000000) {
+        switch (wordChoice) {
+          case 1:
+            wordSelect = "apples";
+            break;
+          case 2:
+            wordSelect = "banana";
+            break;
+          case 3:
+            wordSelect = "cactus";
+            break;
+          case 4:
+            wordSelect = "league";
+            break;
+          case 5:
+            wordSelect = "counter";
+            break;
+          case 6:
+            wordSelect = "select";
+            break;
+          case 7:
+            wordSelect = "inside";
+            break;
+          case 8:
+            wordSelect = "theory";
+            break;
+          case 9:
+            wordSelect = "delete";
+            break;
+          case 10:
+            wordSelect = "treant";
+            break;
+          default:
+
+        }
       }
-      document.getElementById("test").innerHTML = "Type this word: " + compareStr;
+      document.getElementById("test").innerHTML = "Type this word: " + wordSelect;
     }
 
     function textBox() {
@@ -67,7 +119,7 @@
     }
 
     function typePoint() {
-      if (result == compareStr) {
+      if (result == wordSelect) {
         var e = document.getElementById("pointSpan");
         pointAmount();
         setText(e, points + pointValue);
@@ -80,7 +132,7 @@
     }
 
     function pointAmount() {
-      pointValue = compareStr.length * 10
+      pointValue = wordSelect.length * 10
     }
 
     function gainPoint() {
