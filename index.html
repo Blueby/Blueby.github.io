@@ -28,25 +28,11 @@
       text-align: center;
       vertical-align: middle;
       display: table-cell;
-      /* gross */
-      -webkit-touch-callout: none;
-      -webkit-user-select: none;
-      -khtml-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-    }
-    
-    .pointcell {
-      width: 100px;
-      height: 100px;
-      background-color: lightblue;
-      text-align: center;
-      vertical-align: middle;
     }
   </style>
   <script>
     var points = 0;
+    var pointValue = 0;
     var wordChoice;
     var compareStr = "FUCK";
     var result = "FUCK";
@@ -77,19 +63,24 @@
 
     function textBox() {
       result = document.getElementById("textbox").value;
-      document.getElementById("text").innerHTML = "You are typing: " + result;
       typePoint();
     }
 
     function typePoint() {
       if (result == compareStr) {
         var e = document.getElementById("pointSpan");
-        setText(e, ++points);
+        pointAmount();
+        setText(e, points + pointValue);
+        points = points + pointValue;
+        document.getElementById("textbox").value = "";
         randWord();
-        textBox();
       } else {
 
       }
+    }
+
+    function pointAmount() {
+      pointValue = compareStr.length * 10
     }
 
     function gainPoint() {
@@ -110,14 +101,15 @@
   <div id="content">
     <div class="button" onclick="gainPoint();">Credit Tester</div>
     <div class="button" onclick="randWord();">Click to begin</div>
+    <p id="test">Type this word: </p>
     <form>
       Type here:
       <br>
       <input type="text" onkeyup="textBox();" id="textbox">
     </form>
 
-    <p id="test">Type this word: </p>
-    <p id="text">You are typing: </p>
+
+
   </div>
 </body>
 
