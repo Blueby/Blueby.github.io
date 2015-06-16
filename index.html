@@ -1,290 +1,124 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8"/>
-        <!--
-            this is really too trivial to deserve a license but for completeness's
-            sake let's say CC0 (tl;dr "do whatever you want")
+<html>
 
-            https://creativecommons.org/publicdomain/zero/1.0/
-        -->
-        <title>Sample Mechanics for Incremental Games</title>
-        <script>
-////////////////////////////////////////////////////////////////////////////////
-var points = 0;
-var rate_limited_button_enabled = true;
-var chargeable_button_charges = 0;
-var mouseover_table_active_cell = 0;
-var random_mouseover_table_active_cell = 4;
-var holdable_button_held = false;
-var holdable_button_timer_active = false;
-
-function pushTextNode(dest, text) {
-    dest.appendChild(document.createTextNode(text));
-}
-
-function setText(dest, text) {
-    dest.replaceChild(document.createTextNode(text), dest.lastChild);
-}
-
-function pushElement(dest, id, type, cssclass, text) {
-    var e = document.createElement(type);
-    e.id = id;
-    e.className = cssclass;
-    if(text !== null) {
-        pushTextNode(e, text);
+<head>
+  <style>
+    #points_box {
+      position: fixed;
+      left: 10px;
+      top: 5px;
+      width: 100px;
+      border: 1px solid black;
+      padding: 5px;
+      float: left;
+      background-color: lightgreen;
     }
-    dest.appendChild(e);
-    return e;
-}
-
-function gain_point() {
-    var e = document.getElementById("points_span");
-    setText(e, ++points);
-}
-
-function rate_limited_button() {
-    var e = document.getElementById("rate_limited_button");
-    if (rate_limited_button_enabled) {
-        function enable_rate_limited_button() {
-            setText(e, "Click Me");
-            rate_limited_button_enabled = true;
-        }
-        gain_point();
-        setText(e, "wait...");
-        rate_limited_button_enabled = false;
-        window.setTimeout(enable_rate_limited_button, 1000);
+    
+    #content {
+      position: absolute;
+      left: 130px;
     }
-}
-
-function chargeable_button() {
-    var e = document.getElementById("chargeable_button");
-    function updateText() {
-        setText(e, "Click Me ("+chargeable_button_charges+"/100)");
+    
+    .button {
+      width: 100px;
+      height: 50px;
+      border: 1px solid black;
+      background-color: lightblue;
+      user-select: none;
+      text-align: center;
+      vertical-align: middle;
+      display: table-cell;
+      /* gross */
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
     }
-    if (chargeable_button_charges == 0) {
-        function chargeable_button_decay() {
-            chargeable_button_charges--;
-            updateText();
-            if (chargeable_button_charges > 0) {
-                gain_point();
-                window.setTimeout(chargeable_button_decay, 1000);
-            }
-        }
-        window.setTimeout(chargeable_button_decay, 1000);
+    
+    .pointcell {
+      width: 100px;
+      height: 100px;
+      background-color: lightblue;
+      text-align: center;
+      vertical-align: middle;
     }
-    chargeable_button_charges += 10;
-    if (chargeable_button_charges > 100) {
-        chargeable_button_charges = 100;
+  </style>
+  <script>
+    var points = 0;
+    var wordChoice;
+    var compareStr = "FUCK";
+    var result = "FUCK";
+
+    function randWord() {
+      wordChoice = Math.floor((Math.random() * 5) + 1);
+      switch (wordChoice) {
+        case 1:
+          compareStr = "one";
+          break;
+        case 2:
+          compareStr = "two";
+          break;
+        case 3:
+          compareStr = "three";
+          break;
+        case 4:
+          compareStr = "four";
+          break;
+        case 5:
+          compareStr = "five";
+          break;
+        default:
+          document.write("FUCK");
+      }
+      document.getElementById("test").innerHTML = "Type this word: " + compareStr;
     }
-    updateText();
-}
 
-function holdable_button_press() {
-    var delay = 250;
-    var e = document.getElementById("holdable_button");
-    setText(e, "Gaining points...");
-    e.style.backgroundColor = "#777777";
-    holdable_button_held = true;
-    if (!holdable_button_timer_active) {
-        function holdable_button_tick() {
-            if (holdable_button_held) {
-                gain_point();
-                window.setTimeout(holdable_button_tick, delay);
-            }
-            else {
-                holdable_button_timer_active = false;
-            }
-        }
-        window.setTimeout(holdable_button_tick, delay);
-        holdable_button_timer_active = true;
+    function textBox() {
+      result = document.getElementById("textbox").value;
+      document.getElementById("text").innerHTML = "You are typing: " + result;
+      typePoint();
     }
-}
 
-function holdable_button_depress() {
-    var e = document.getElementById("holdable_button");
-    setText(e, "Click-and-hold me");
-    e.style.backgroundColor = "lightblue";
-    holdable_button_held = false;
-}
+    function typePoint() {
+      if (result == compareStr) {
+        var e = document.getElementById("pointSpan");
+        setText(e, ++points);
+        randWord();
+        textBox();
+      } else {
 
-function redraw_mouseover_table() {
-    for(var i = 0; i < 8; i++) {
-        var e = document.getElementById("pointcell"+i);
-        setText(e, i == mouseover_table_active_cell ? "mouseover me" : "");
+      }
     }
-}
 
-function mouseover_cell(i) {
-    if (i == mouseover_table_active_cell) {
-        gain_point();
-        mouseover_table_active_cell = (mouseover_table_active_cell + 1) % 8;
-        redraw_mouseover_table();
+    function gainPoint() {
+      var e = document.getElementById("pointSpan");
+      setText(e, ++points);
+
     }
-}
 
-function redraw_random_mouseover_table() {
-    for(var i = 0; i < 9; i++) {
-        var e = document.getElementById("random_pointcell"+i);
-        setText(e, i == random_mouseover_table_active_cell ? "mouseover me" : "");
+    function setText(dest, text) {
+      dest.replaceChild(document.createTextNode(text), dest.lastChild);
     }
-}
+  </script>
+</head>
 
-function mouseover_random_cell(i) {
-    if (i == random_mouseover_table_active_cell) {
-        gain_point();
-        random_mouseover_table_active_cell = Math.floor(Math.random() * 8);
-        if (random_mouseover_table_active_cell >= i) {
-            random_mouseover_table_active_cell++;
-        }
-        redraw_random_mouseover_table();
-    }
-}
+<body>
 
-function onload() {
-    redraw_mouseover_table();
-    redraw_random_mouseover_table();
-}
-////////////////////////////////////////////////////////////////////////////////
-        </script>
-        <style>
-/******************************************************************************/
-#points_box {
-    position: fixed;
-    left: 10px;
-    top: 30%;
-    width: 100px;
-    border: 1px solid black;
-    padding: 5px;
-    float: left;
-    background-color: lightgreen;
-}
-#content {
-    position: absolute;
-    left: 130px;
-}
-.button {
-    width: 100px;
-    height: 50px;
-    border: 1px solid black;
-    background-color: lightblue;
-    user-select: none;
-    text-align: center;
-    vertical-align: middle;
-    display: table-cell;
+  <div id="points_box">Credits: <span id="pointSpan">0</span></div>
+  <div id="content">
+    <div class="button" onclick="gainPoint();">Credit Tester</div>
+    <div class="button" onclick="randWord();">Click to begin</div>
+    <form>
+      Type here:
+      <br>
+      <input type="text" onkeyup="textBox();" id="textbox">
+    </form>
 
-    /* gross */
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-.pointcell {
-    width: 100px;
-    height: 100px;
-    background-color: lightblue;
-    text-align: center;
-    vertical-align: middle;
-}
-/******************************************************************************/
-        </style>
-    </head>
-    <body onload="onload();">
-        <div id="points_box">POINTS: <span id="points_span">0</span></div>
-        <div id="content">
-            <p>
-            A lot of people on <a href="https://www.reddit.com/r/incremental_games">/r/incrementalgames</a> are
-            worried, justifiably, about <abbr title="repetitive strain injury">RSI</abbr>. This page is a lazy sketch of
-            a few different possible mechanics for such games, some of which are hopefully more friendly to peoples'
-            hands. <noscript>If you can see this sentence, you probably have Javascript disabled, which means this page
-            will be a pretty disappointing experience for you.</noscript>
-            </p>
+    <p id="test">Type this word: </p>
+    <p id="text">You are typing: </p>
+  </div>
+</body>
 
-            <h1>Button</h1>
-            <p>
-            The standard, no-frills button that a lot of incremental games use. Click for points.
-            </p>
-            <div class="button" onclick="gain_point();">Click Me</div>
-            <p>
-            This one uses an input tag instead of a div; this means it has a bug/feature where you can click once and
-            hold down the enter key for easy points.
-            </p>
-            <p>
-            <input type="button" onclick="gain_point();" value="Gain Point" />
-            </p>
-
-            <h1>Rate-limited button</h1>
-            <p>
-            You still have to click this one, but you'll only gain points from it once a second or so. This puts a limit
-            on the pace of your game and hopefully discourages people from clicking so hard they'll hurt themselves. But
-            it's still a lot of clicking.
-            </p>
-            <div id="rate_limited_button" class="button" onclick="rate_limited_button();">Click Me</div>
-
-            <h1>Chargeable button</h1>
-            <p>
-            This is kind of a compromise between the regular button and the rate-limited button, where you click to
-            charge it up, and it gains points over time by spending charge. It doesn't do anything to limit clicking by
-            itself - you could cap the maximum charge, or have it be a sort of battery where you click once to max it
-            out and that sets it up to gain points over the next minute or so, or etc etc etc. The example below charges
-            10 per click up to 100.
-            </p>
-            <div id="chargeable_button" class="button" onclick="chargeable_button();">Click Me (0/100)</div>
-
-            <h1>Click-and-hold</h1>
-            <p>
-            Instead of clicking repeatedly, click a button and hold it down.
-            </p>
-            <div id="holdable_button" class="button" onmousedown="holdable_button_press();"
-                onmouseup="holdable_button_depress();" onmouseout="holdable_button_depress();">Click-and-hold me</div>
-
-            <h1>Mouseover</h1>
-            <p>
-            What if instead of a button, you had to chase stuff with your mouse? Kinder to your fingers, but probably
-            sucks if you're on a laptop (and I have no idea how this would work on a phone/tablet).
-            </p>
-            <table>
-                <tr>
-                    <td id="pointcell0" class="pointcell" onmouseover="mouseover_cell(0);">&nbsp;</td>
-                    <td id="pointcell1" class="pointcell" onmouseover="mouseover_cell(1);">&nbsp;</td>
-                    <td id="pointcell2" class="pointcell" onmouseover="mouseover_cell(2);">&nbsp;</td>
-                </tr>
-                <tr>
-                    <td id="pointcell7" class="pointcell" onmouseover="mouseover_cell(7);">&nbsp;</td>
-                    <td class="pointcell" style="background-color: white;"></td>
-                    <td id="pointcell3" class="pointcell" onmouseover="mouseover_cell(3);">&nbsp;</td>
-                </tr>
-                <tr>
-                    <td id="pointcell6" class="pointcell" onmouseover="mouseover_cell(6);">&nbsp;</td>
-                    <td id="pointcell5" class="pointcell" onmouseover="mouseover_cell(5);">&nbsp;</td>
-                    <td id="pointcell4" class="pointcell" onmouseover="mouseover_cell(4);">&nbsp;</td>
-                </tr>
-            </table>
-
-            <h1>Random mouseover</h1>
-            <p>
-            As above, but the target moves randomly instead of in a dial pattern. Less repetitive = better for your
-            hands?
-            </p>
-            <table>
-                <tr>
-                    <td id="random_pointcell0" class="pointcell" onmouseover="mouseover_random_cell(0);">&nbsp;</td>
-                    <td id="random_pointcell1" class="pointcell" onmouseover="mouseover_random_cell(1);">&nbsp;</td>
-                    <td id="random_pointcell2" class="pointcell" onmouseover="mouseover_random_cell(2);">&nbsp;</td>
-                </tr>
-                <tr>
-                    <td id="random_pointcell3" class="pointcell" onmouseover="mouseover_random_cell(3);">&nbsp;</td>
-                    <td id="random_pointcell4" class="pointcell" onmouseover="mouseover_random_cell(4);">&nbsp;</td>
-                    <td id="random_pointcell5" class="pointcell" onmouseover="mouseover_random_cell(5);">&nbsp;</td>
-                </tr>
-                <tr>
-                    <td id="random_pointcell6" class="pointcell" onmouseover="mouseover_random_cell(6);">&nbsp;</td>
-                    <td id="random_pointcell7" class="pointcell" onmouseover="mouseover_random_cell(7);">&nbsp;</td>
-                    <td id="random_pointcell8" class="pointcell" onmouseover="mouseover_random_cell(8);">&nbsp;</td>
-                </tr>
-            </table>
-        </div>
-    </body>
 </html>
