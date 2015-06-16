@@ -2,16 +2,16 @@
 <html>
 
 <head>
+  <link href="css/hover.css" rel="stylesheet" media="all">
   <style>
     #points_box {
       position: fixed;
       left: 10px;
-      top: 5px;
-      width: 100px;
-      border: 1px solid black;
+      top: 10px;
+      border: 2px solid black;
       padding: 5px;
       float: left;
-      background-color: lightgreen;
+      background-color: #99CCFF;
     }
     
     #content {
@@ -20,10 +20,9 @@
     }
     
     .button {
-      width: 100px;
-      height: 50px;
-      border: 1px solid black;
-      background-color: lightblue;
+      padding: 5px;
+      border: 2px solid black;
+      background-color: #99CCFF;
       user-select: none;
       text-align: center;
       vertical-align: middle;
@@ -39,7 +38,7 @@
 
     function randWord() {
       wordChoice = Math.floor((Math.random() * 10) + 1);
-      if (points <= 2000) {
+      if (points <= 600) {
         switch (wordChoice) {
           case 1:
             wordSelect = "aid";
@@ -151,7 +150,7 @@
 
   <div id="points_box">Credits: <span id="pointSpan">0</span></div>
   <div id="content">
-    <div class="button" onclick="gainPoint();">Credit Tester</div>
+    <div class="button shutter-out-horizontal" onclick="gainPoint();">Credit Tester</div><br>
     <div class="button" onclick="randWord();">Click to begin</div>
     <p id="test">Type this word: </p>
     <form>
@@ -159,7 +158,16 @@
       <br>
       <input type="text" onkeyup="textBox();" id="textbox">
     </form>
-
+    <br><br><br><br><br><br><br><br><br>
+<font size=2>Help feed me so I can keep updating;<br>
+any amount is appreciated!</font>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
 
 
   </div>
