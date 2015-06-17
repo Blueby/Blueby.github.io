@@ -2,172 +2,44 @@
 <html>
 
 <head>
-  <link href="css/hover.css" rel="stylesheet" media="all">
-  <style>
-    #points_box {
-      position: fixed;
-      left: 10px;
-      top: 10px;
-      border: 2px solid black;
-      padding: 5px;
-      float: left;
-      background-color: #99CCFF;
-    }
-    
-    #content {
-      position: absolute;
-      left: 130px;
-    }
-    
-    .button {
-      padding: 5px;
-      border: 2px solid black;
-      background-color: #99CCFF;
-      user-select: none;
-      text-align: center;
-      vertical-align: middle;
-      display: table-cell;
-    }
-  </style>
-  <script>
-    var points = 0;
-    var pointValue = 0;
-    var wordChoice;
-    var wordSelect = "FUCK";
-    var result = "FUCK";
-
-    function randWord() {
-      wordChoice = Math.floor((Math.random() * 10) + 1);
-      if (points <= 600) {
-        switch (wordChoice) {
-          case 1:
-            wordSelect = "aid";
-            break;
-          case 2:
-            wordSelect = "she";
-            break;
-          case 3:
-            wordSelect = "the";
-            break;
-          case 4:
-            wordSelect = "yak";
-            break;
-          case 5:
-            wordSelect = "pot";
-            break;
-          case 6:
-            wordSelect = "pan";
-            break;
-          case 7:
-            wordSelect = "cat";
-            break;
-          case 8:
-            wordSelect = "blue";
-            break;
-          case 9:
-            wordSelect = "axel";
-            break;
-          case 10:
-            wordSelect = "mesh";
-            break;
-          default:
-            document.write("FUCK");
-        }
-      } else if (points <= 1000000) {
-        switch (wordChoice) {
-          case 1:
-            wordSelect = "apples";
-            break;
-          case 2:
-            wordSelect = "banana";
-            break;
-          case 3:
-            wordSelect = "cactus";
-            break;
-          case 4:
-            wordSelect = "league";
-            break;
-          case 5:
-            wordSelect = "counter";
-            break;
-          case 6:
-            wordSelect = "select";
-            break;
-          case 7:
-            wordSelect = "inside";
-            break;
-          case 8:
-            wordSelect = "theory";
-            break;
-          case 9:
-            wordSelect = "delete";
-            break;
-          case 10:
-            wordSelect = "treant";
-            break;
-          default:
-
-        }
-      }
-      document.getElementById("test").innerHTML = "Type this word: " + wordSelect;
-    }
-
-    function textBox() {
-      result = document.getElementById("textbox").value;
-      typePoint();
-    }
-
-    function typePoint() {
-      if (result == wordSelect) {
-        var e = document.getElementById("pointSpan");
-        pointAmount();
-        setText(e, points + pointValue);
-        points = points + pointValue;
-        document.getElementById("textbox").value = "";
-        randWord();
-      } else {
-
-      }
-    }
-
-    function pointAmount() {
-      pointValue = wordSelect.length * 10
-    }
-
-    function gainPoint() {
-      var e = document.getElementById("pointSpan");
-      setText(e, ++points);
-
-    }
-
-    function setText(dest, text) {
-      dest.replaceChild(document.createTextNode(text), dest.lastChild);
-    }
-  </script>
+      <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
 </head>
 
-<body>
+<body onload="onLoad();">
 
   <div id="points_box">Credits: <span id="pointSpan">0</span></div>
+  <div id="secretary_box">Secretaries: <span id="secretarySpan">0</span></div>
+  <div id="company_box">Companies: <span id="companySpan">0</span></div>
   <div id="content">
-    <div class="button shutter-out-horizontal" onclick="gainPoint();">Credit Tester</div><br>
-    <div class="button" onclick="randWord();">Click to begin</div>
+    <a href="#" class="button" onclick="gainPoint();">Credit Tester (+100)</a>
+    <br>
+    <a href="#" class="button" onclick="addSecretary();" id="secretaryButton">Hire Secretary (1 CpS): 200 Credits</a>
+    <br>
+    <a href="#" class="button" onclick="addCompany();" id="companyButton">Buy a Company (100 CpS): 1000 Credits</a>
     <p id="test">Type this word: </p>
     <form>
       Type here:
-      <br>
       <input type="text" onkeyup="textBox();" id="textbox">
     </form>
-    <br><br><br><br><br><br><br><br><br>
-<font size=2>Help feed me so I can keep updating;<br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <font size=2>Help feed me so I can keep updating;<br>
 any amount is appreciated!</font>
-<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-<input type="hidden" name="cmd" value="_s-xclick">
-<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+      <input type="hidden" name="cmd" value="_s-xclick">
+      <input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
 ">
-<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-</form>
+      <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+      <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+    </form>
 
 
   </div>
