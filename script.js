@@ -140,7 +140,7 @@ function setText(dest, text) {
 }
 
 var secretary = 0;
-var secretaryCost = 200;
+var secretaryCost = 100;
 
 function addSecretary() {
   if (points >= secretaryCost) {
@@ -155,14 +155,14 @@ function addSecretary() {
 }
 
 var company = 0;
-var companyCost = 1000;
+var companyCost = 250;
 
 function addCompany() {
   if (points >= companyCost) {
     var a = document.getElementById("companySpan");
     var b = document.getElementById("pointSpan");
-    points = Math.floor(points - companyCost);
-    companyCost = (companyCost * 1.1);
+    points = (points - companyCost);
+    companyCost = Math.floor(companyCost * 1.1);
     setText(a, ++company);
     setText(b, points);
     document.getElementById("companyButton").innerHTML = "Start a company (100 CpS): " + companyCost + " Credits";
