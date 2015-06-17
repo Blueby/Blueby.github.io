@@ -10,6 +10,12 @@ function onLoad() {
   credits();
 }
 
+function wrongWord() {
+  var wrong = document.getElementById("textbox").value;
+  document.getElementById("wrongWord").innerHTML = "You typed " + "\"" + wrong + "\"" + " Try again.";
+  return false;
+}
+
 function randWord() {
   wordChoice = Math.floor((Math.random() * 10) + 1);
   if (points <= 1000) {
@@ -131,7 +137,7 @@ function addSecretary() {
     var a = document.getElementById("secretarySpan");
     var b = document.getElementById("pointSpan");
     points = (points - secretaryCost);
-    secretaryCost = (secretaryCost + 10);
+    secretaryCost = Math.floor(secretaryCost * 1.1);
     setText(a, ++secretary);
     setText(b, points);
     document.getElementById("secretaryButton").innerHTML = "Hire Secretary (1 CpS): " + secretaryCost + " Credits";
@@ -145,8 +151,8 @@ function addCompany() {
   if (points >= companyCost) {
     var a = document.getElementById("companySpan");
     var b = document.getElementById("pointSpan");
-    points = (points - companyCost);
-    companyCost = (companyCost + 100);
+    points = Math.floor(points - companyCost);
+    companyCost = (companyCost * 1.1);
     setText(a, ++company);
     setText(b, points);
     document.getElementById("companyButton").innerHTML = "Start a company (100 CpS): " + companyCost + " Credits";
