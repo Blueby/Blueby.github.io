@@ -10,10 +10,38 @@ function onLoad() {
   credits();
 }
 
-function wrongWord() {
+function wordCheck() {
+  result = document.getElementById("textbox").value;
+  if(result == wordSelect) {
+    var a = document.getElementById("pointSpan");
+    pointAmount();
+    setText(a, points + pointValue);
+    points = points + pointValue;
+    document.getElementById("textbox").value = "";
+    document.getElementById("wrongWord").innerHTML = "";
+    randWord();
+    return false;
+  }
+  else {
   var wrong = document.getElementById("textbox").value;
-  document.getElementById("wrongWord").innerHTML = "You typed " + "\"" + wrong + "\"" + " Try again.";
+  document.getElementById("wrongWord").innerHTML = "Try again, you typed " + "\"" + wrong + "\"";
   return false;
+}
+}
+function textBox() {
+  result = document.getElementById("textbox").value;
+  typePoint();
+}
+
+function typePoint() {
+  if (result == wordSelect) {
+    var a = document.getElementById("pointSpan");
+    pointAmount();
+    setText(a, points + pointValue);
+    points = points + pointValue;
+    document.getElementById("textbox").value = "";
+    randWord();
+  }
 }
 
 function randWord() {
@@ -91,24 +119,6 @@ function randWord() {
     }
   }
   document.getElementById("test").innerHTML = "Type this word: " + wordSelect;
-}
-
-function textBox() {
-  result = document.getElementById("textbox").value;
-  typePoint();
-}
-
-function typePoint() {
-  if (result == wordSelect) {
-    var a = document.getElementById("pointSpan");
-    pointAmount();
-    setText(a, points + pointValue);
-    points = points + pointValue;
-    document.getElementById("textbox").value = "";
-    randWord();
-  } else {
-
-  }
 }
 
 function pointAmount() {
