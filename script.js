@@ -5,6 +5,36 @@ function onLoad() {
   creditLoad();
 }
 
+/* Audio 
+function playTypeSound() {
+  var audio = document.getElementById("audio");
+  audio.play();
+}
+*/
+
+function resetGame() {
+  var a = document.getElementById("creditSpan");
+  var b = document.getElementById("secretarySpan");
+  var c = document.getElementById("companySpan");
+  var d = document.getElementById("typewriterSpan");
+  setText(a, 0);
+  setText(b, 0);
+  setText(c, 0);
+  setText(d, 1);
+  document.getElementById("secretaryButton").innerHTML = document.getElementById("secretaryButton").innerHTML = "Hire Secretary (1 CpS): 100 Credits";
+  document.getElementById("companyButton").innerHTML = document.getElementById("companyButton").innerHTML = "Buy a Company (10 CpS): 250 Credits";
+  document.getElementById("typeButton").innerHTML = document.getElementById("typeButton").innerHTML = "Upgrade Typewriter (2x): 1000 Credits";
+  credits = 0;
+  totalCredits = 0;
+  typewriters = 0;
+  typewriterCost = 1000;
+  secretary = 0;
+  secretaryCost = 100;
+  company = 0;
+  companyCost = 250;
+  randWord();
+}
+
 var wordChoice;
 var wordSelect = "FUCK";
 var result = "FUCK";
@@ -30,7 +60,7 @@ function wordCheck() {
 
 function randWord() {
   wordChoice = Math.floor((Math.random() * 10) + 1);
-  if (totalCredits <= 750) {
+  if (typewriters == 0) {
     switch (wordChoice) {
       case 1:
         wordSelect = "aid";
@@ -65,7 +95,7 @@ function randWord() {
       default:
         wordSelect = "ERROR ERROR Default Case"
     }
-  } else if (totalCredits <= 1000000) {
+  } else if (typewriters == 1) {
     switch (wordChoice) {
       case 1:
         wordSelect = "apples";
@@ -96,6 +126,42 @@ function randWord() {
         break;
       case 10:
         wordSelect = "treant";
+        break;
+      default:
+        wordSelect = "ERROR ERROR Default Case"
+
+    }
+  } else if (typewriters >= 2) {
+    switch (wordChoice) {
+      case 1:
+        wordSelect = "dear lord i suck at coding";
+        break;
+      case 2:
+        wordSelect = "send help";
+        break;
+      case 3:
+        wordSelect = "how does one javascript?";
+        break;
+      case 4:
+        wordSelect = "has anyone really been so far even as decided to use even go want to do look more like?";
+        break;
+      case 5:
+        wordSelect = "ThIs SENtenCe Is teRRiBle t0 Type; wow i Hate this sen3Nce.";
+        break;
+      case 6:
+        wordSelect = "ayy lmao this suddenly got really hard";
+        break;
+      case 7:
+        wordSelect = "How Can Mirrors Be Real If Our Eyes Aren't Real";
+        break;
+      case 8:
+        wordSelect = "foxskymusic is famous";
+        break;
+      case 9:
+        wordSelect = "Let us depart on a magical journey through the realms of code.";
+        break;
+      case 10:
+        wordSelect = "ERROR ERROR ERROR ERROR ERROR jk, working as intended";
         break;
       default:
         wordSelect = "ERROR ERROR Default Case"
@@ -172,6 +238,7 @@ function upTypewriter() {
     typewriterEffect();
     setText(a, typewriterMult);
     setText(b, credits);
+    randWord();
     document.getElementById("typeButton").innerHTML = "Upgrade Typewriter (2x): " + typewriterCost.toFixed() + " Credits";
   }
 }
@@ -223,7 +290,7 @@ function addCompany() {
     credits = (credits - companyCost);
     companyCost = (companyCost * 1.1);
     setText(b, credits);
-    document.getElementById("companyButton").innerHTML = "Start a company (10 CpS): " + companyCost.toFixed() + " Credits";
+    document.getElementById("companyButton").innerHTML = "Buy a Company (10 CpS): " + companyCost.toFixed() + " Credits";
   }
   if (company >= 1000000) {
     var companyMil = (company / 1000000);
