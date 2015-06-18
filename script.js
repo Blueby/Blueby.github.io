@@ -1,44 +1,44 @@
 // Code goes here
-var points = 0;
-var pointValue = 0;
+var credits = 0;
 var wordChoice;
 var wordSelect = "FUCK";
 var result = "FUCK";
+var creditValue = 0;
 
 function onLoad() {
   randWord();
-  credits();
+  creditLoad();
 }
 
 function wordCheck() {
   result = document.getElementById("textbox").value;
-  if(result == wordSelect) {
-    var a = document.getElementById("pointSpan");
-    pointAmount();
-    setText(a, points + pointValue);
-    points = points + pointValue;
+  if (result == wordSelect) {
+    var a = document.getElementById("creditSpan");
+    creditAmount();
+    setText(a, credits + creditValue);
+    credits = credits + creditValue;
     document.getElementById("textbox").value = "";
     document.getElementById("wrongWord").innerHTML = "";
     randWord();
     return false;
+  } else {
+    var wrong = document.getElementById("textbox").value;
+    document.getElementById("wrongWord").innerHTML = "Try again, you typed " + "\"" + wrong + "\"";
+    return false;
   }
-  else {
-  var wrong = document.getElementById("textbox").value;
-  document.getElementById("wrongWord").innerHTML = "Try again, you typed " + "\"" + wrong + "\"";
-  return false;
-}
-}
-function textBox() {
-  result = document.getElementById("textbox").value;
-  typePoint();
 }
 
-function typePoint() {
+function textBox() {
+  result = document.getElementById("textbox").value;
+  typeCredit();
+}
+
+function typeCredit() {
   if (result == wordSelect) {
-    var a = document.getElementById("pointSpan");
-    pointAmount();
-    setText(a, points + pointValue);
-    points = points + pointValue;
+    var a = document.getElementById("creditSpan");
+    creditAmount();
+    setText(a, credits + creditValue);
+    credits = credits + creditValue;
     document.getElementById("textbox").value = "";
     randWord();
   }
@@ -46,7 +46,7 @@ function typePoint() {
 
 function randWord() {
   wordChoice = Math.floor((Math.random() * 10) + 1);
-  if (points <= 1000) {
+  if (credits <= 1000) {
     switch (wordChoice) {
       case 1:
         wordSelect = "aid";
@@ -81,7 +81,7 @@ function randWord() {
       default:
         wordSelect = "ERROR ERROR Default Case"
     }
-  } else if (points <= 1000000) {
+  } else if (credits <= 1000000) {
     switch (wordChoice) {
       case 1:
         wordSelect = "apples";
@@ -121,18 +121,18 @@ function randWord() {
   document.getElementById("test").innerHTML = "Type this word: " + wordSelect;
 }
 
-function pointAmount() {
-  pointValue = wordSelect.length * 10
+function creditAmount() {
+  creditValue = (wordSelect.length * 10)
 }
 
-function gainPoint() {
-  points = (points + 100);
+function gainCredit() {
+  credits = (credits + 100);
   updateCreditText();
 }
 
 function updateCreditText() {
-  var a = document.getElementById("pointSpan");
-  setText(a, points);
+  var a = document.getElementById("creditSpan");
+  setText(a, credits);
 }
 
 function setText(dest, text) {
@@ -143,13 +143,13 @@ var secretary = 0;
 var secretaryCost = 100;
 
 function addSecretary() {
-  if (points >= secretaryCost) {
+  if (credits >= secretaryCost) {
     var a = document.getElementById("secretarySpan");
-    var b = document.getElementById("pointSpan");
-    points = (points - secretaryCost);
+    var b = document.getElementById("creditSpan");
+    credits = (credits - secretaryCost);
     secretaryCost = Math.floor(secretaryCost * 1.1);
     setText(a, ++secretary);
-    setText(b, points);
+    setText(b, credits);
     document.getElementById("secretaryButton").innerHTML = "Hire Secretary (1 CpS): " + secretaryCost + " Credits";
   }
 }
@@ -158,14 +158,14 @@ var company = 0;
 var companyCost = 250;
 
 function addCompany() {
-  if (points >= companyCost) {
+  if (credits >= companyCost) {
     var a = document.getElementById("companySpan");
-    var b = document.getElementById("pointSpan");
-    points = (points - companyCost);
+    var b = document.getElementById("creditSpan");
+    credits = (credits - companyCost);
     companyCost = Math.floor(companyCost * 1.1);
     setText(a, ++company);
-    setText(b, points);
-    document.getElementById("companyButton").innerHTML = "Start a company (100 CpS): " + companyCost + " Credits";
+    setText(b, credits);
+    document.getElementById("companyButton").innerHTML = "Start a company (10 CpS): " + companyCost + " Credits";
   }
 }
 
@@ -176,18 +176,18 @@ function creditCalc() {
 }
 
 function secretaryPS() {
-  var secPoints = 0;
-  secPoints = (secretary * 1);
-  points = (points + secPoints);
+  var secCredits = 0;
+  secCredits = (secretary * 1);
+  credits = (credits + secCredits);
 }
 
 function companyPS() {
-  var companyPoints = 0;
-  companyPoints = (company * 100);
-  points = (points + companyPoints);
+  var companyCredits = 0;
+  companyCredits = (company * 10);
+  credits = (credits + companyCredits);
 }
 
-function credits() {
+function creditLoad() {
   var testVar = setInterval(function() {
     creditCalc()
   }, 1000);

@@ -8,15 +8,15 @@
 
 <body onload="onLoad();">
 
-  <div id="points_box">Credits: <span id="pointSpan">0</span></div>
+  <div id="credits_box">Credits: <span id="creditSpan">0</span></div>
   <div id="secretary_box">Secretaries: <span id="secretarySpan">0</span></div>
   <div id="company_box">Companies: <span id="companySpan">0</span></div>
   <div id="content">
-    <a href="#" class="button" onclick="gainPoint();">Credit Tester (+100)</a>
-    <br>
-    <a href="#" class="button" onclick="addSecretary();" id="secretaryButton">Hire Secretary (1 CpS): 200 Credits</a>
-    <br>
-    <a href="#" class="button" onclick="addCompany();" id="companyButton">Buy a Company (100 CpS): 1000 Credits</a>
+    <a href="#" class="button" onclick="gainCredit();">Credit Tester (+100)</a>
+    <br><br>
+    <a href="#" class="button" onclick="addSecretary();" id="secretaryButton">Hire Secretary (1 CpS): 100 Credits</a>
+    <br><br>
+    <a href="#" class="button" onclick="addCompany();" id="companyButton">Buy a Company (10 CpS): 250 Credits</a>
     <p id="test">Type this word: </p>
     <form onsubmit="return wordCheck();">
       Type here:
@@ -32,7 +32,7 @@
     <br>
     <br>
     <br>
-    <font size=2>Help feed me so I can keep updating;<br>
+    <div id="donate"><font size=2>Help feed me so I can keep updating;<br>
 any amount is appreciated!</font>
     <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
       <input type="hidden" name="cmd" value="_s-xclick">
@@ -41,7 +41,7 @@ any amount is appreciated!</font>
       <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
       <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
     </form>
-
+</div>
 
   </div>
 </body>
