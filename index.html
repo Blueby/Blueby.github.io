@@ -11,19 +11,21 @@
   <div id="credits_box">Credits: <span id="creditSpan">0</span></div>
   <div id="secretary_box">Secretaries: <span id="secretarySpan">0</span></div>
   <div id="company_box">Companies: <span id="companySpan">0</span></div>
+  <div id="typewriter_box">Current Multiplier: <span id="typewriterSpan">1</span></div>
   <div id="content">
-    <a href="#" class="button" onclick="gainCredit();">Credit Tester (+100)</a>
+    <a href="#" class="button" onclick="gainCredit();">Add Credits</a>
     <br><br>
     <a href="#" class="button" onclick="addSecretary();" id="secretaryButton">Hire Secretary (1 CpS): 100 Credits</a>
     <br><br>
     <a href="#" class="button" onclick="addCompany();" id="companyButton">Buy a Company (10 CpS): 250 Credits</a>
-    <p id="test">Type this word: </p>
+    <p id="test">Type: </p>
     <form onsubmit="return wordCheck();">
       Type here:
       <input type="text" id="textbox">
     </form>
     <p id="wrongWord"></p>
     <br>
+    <a href="#" class="button" onclick="upTypewriter();" id="typeButton">Upgrade Typewriter (2x): 1000 Credits</a>
     <br>
     <br>
     <br>

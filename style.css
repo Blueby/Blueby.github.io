@@ -1,6 +1,7 @@
 /* Styles go here */
 
 #credits_box {
+  width: 200px;
   font-family: Helvetica;
   position: fixed;
   left: 350px;
@@ -12,6 +13,7 @@
 }
 
 #secretary_box {
+  width: 200px;
   font-family: Helvetica;
   position: fixed;
   left: 350px;
@@ -23,10 +25,23 @@
 }
 
 #company_box {
+  width: 200px;
   font-family: Helvetica;
   position: fixed;
   left: 350px;
   top: 82px;
+  border: 2px solid black;
+  padding: 5px;
+  float: left;
+  background-color: #99CCFF;
+}
+
+#typewriter_box {
+  width: 200px;
+  font-family: Helvetica;
+  position: fixed;
+  left: 350px;
+  top: 118px;
   border: 2px solid black;
   padding: 5px;
   float: left;
