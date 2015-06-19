@@ -5,6 +5,11 @@ FIRST CODING PROJECT, LEARNING FROM SCRATCH
 #Changelog:
 6/19/15:
 
+1.7
+
+-fix major issue
+
+
 1.6
 
 -change penalty to 50% of word value

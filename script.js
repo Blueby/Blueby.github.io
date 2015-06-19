@@ -156,7 +156,7 @@ function randWord() {
         wordSelect = "mesh";
         break;
       default:
-        wordSelect = "ERROR ERROR Default Case"
+        wordSelect = "ERROR ERROR Default Case";
     }
   } else if (typewriters == 1) {
     switch (wordChoice) {
@@ -191,7 +191,7 @@ function randWord() {
         wordSelect = "treant";
         break;
       default:
-        wordSelect = "ERROR ERROR Default Case"
+        wordSelect = "ERROR ERROR Default Case";
 
     }
   } else if (typewriters >= 2) {
@@ -227,7 +227,7 @@ function randWord() {
         wordSelect = "ERROR ERROR ERROR ERROR ERROR jk, working as intended";
         break;
       default:
-        wordSelect = "ERROR ERROR Default Case"
+        wordSelect = "ERROR ERROR Default Case";
 
     }
   }
@@ -254,8 +254,8 @@ function gainCredit() {
 
 function updateCreditText() {
   var a = document.getElementById("creditSpan");
-  var b = document.getElementById("totalCESpan");
-  var c = document.getElementById("totalCLSpan");
+  /* var b = document.getElementById("totalCESpan");
+  var c = document.getElementById("totalCLSpan"); */
   /* Billion */
   if (credits >= 1000000000) {
     var credBil = (credits / 1000000000);
@@ -274,15 +274,15 @@ function updateCreditText() {
   } */
   else {
     setText(a, credits.toFixed());
-    setText(b, totalCredits.toFixed());
-    setText(c, totalCreditsLost.toFixed());
+    /* setText(b, totalCredits.toFixed());
+    setText(c, totalCreditsLost.toFixed()); */
   }
 }
 
 function updateCPSText() {
   var a = document.getElementById("cpsSpan");
   var b = totalSecretaryCPS + totalCompanyCPS;
-  setText(a, b)
+  setText(a, b);
 }
 
 function setText(dest, text) {
