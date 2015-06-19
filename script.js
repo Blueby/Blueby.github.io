@@ -5,12 +5,44 @@ function onLoad() {
   creditLoad();
 }
 
-/* Audio 
-function playTypeSound() {
-  var audio = document.getElementById("audio");
-  audio.play();
+var typeSound = 1;
+
+function startSound() {
+  switch (typeSound) {
+    case 1:
+      var audio = document.getElementById("audio");
+	  audio.volume = .2;
+      audio.play();
+      ++typeSound;
+      break;
+    case 2:
+      var audio2 = document.getElementById("audio2");
+	  	  audio2.volume = .2;
+      audio2.play();
+      ++typeSound;
+      break;
+    case 3:
+      var audio3 = document.getElementById("audio3");
+	  	  audio3.volume = .2;
+      audio3.play();
+      ++typeSound;
+      break;
+    case 4:
+      var audio4 = document.getElementById("audio4");
+	  	  audio4.volume = .2;
+      audio4.play();
+      ++typeSound;
+      break;
+    case 5:
+      var audio5 = document.getElementById("audio5");
+	  	  audio5.volume = .2;
+      audio5.play();
+      typeSound = 1;
+      break;
+    default:
+      document.getElementById("textbox").value = "FUCK";
+  }
 }
-*/
 
 function resetGame() {
   var a = document.getElementById("creditSpan");
