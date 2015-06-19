@@ -94,16 +94,24 @@ function wordCheck() {
   if (result == wordSelect) {
     var a = document.getElementById("creditSpan");
     creditAmount();
-    setText(a, credits + creditValue);
+    updateCreditText();
     credits = (credits + creditValue);
     totalCredits = totalCredits = creditValue;
     document.getElementById("textbox").value = "";
-    document.getElementById("wrongWord").innerHTML = "";
+    document.getElementById("wrongWord").innerHTML = "+" + creditValue + " Credits";
     randWord();
+    return false;
+  } else if (result == "") {
+    document.getElementById("wrongWord").innerHTML = "You didn't type anything...";
     return false;
   } else {
     var wrong = document.getElementById("textbox").value;
-    document.getElementById("wrongWord").innerHTML = "Try again, you typed " + "\"" + wrong + "\"";
+    document.getElementById("textbox").value = "";
+    creditAmount();
+    var creditsLost = (creditValue * 1.5);
+    credits = credits - creditsLost;
+    document.getElementById("wrongWord").innerHTML = "-" + creditsLost + " Credits: You typed " + "\"" + wrong + "\"";
+    updateCreditText();
     return false;
   }
 }
@@ -256,7 +264,8 @@ function updateCreditText() {
   else if (credits >= 1000) {
     var credTh = (credits / 1000);
     setText(a, (credTh.toFixed(2) + " Thousand"));
-  } */else {
+  } */
+  else {
     setText(a, credits.toFixed());
   }
 }

@@ -5,6 +5,17 @@ FIRST CODING PROJECT, LEARNING FROM SCRATCH
 #Changelog:
 6/19/15:
 
+1.5
+
+-you can't cheat anymore (copy & paste)
+
+-the game now punishes you for a typo (150% of the word value)
+
+-misc fixes/code optimization
+
+-more UI work
+
+
 1.4
 
 -added more sounds
