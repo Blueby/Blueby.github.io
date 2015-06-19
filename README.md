@@ -5,6 +5,11 @@ FIRST CODING PROJECT, LEARNING FROM SCRATCH
 #Changelog:
 6/19/15:
 
+1.3
+
+-fixed various issues
+
+
 1.2
 
 -update UI
@@ -14,7 +19,15 @@ FIRST CODING PROJECT, LEARNING FROM SCRATCH
 
 1.1
 
--UI overhaul
+added:
+
+-show CpS
+
+-more upgrades!
+
+-reset confirmation prompt
+
+misc:
 
 -code cleanup
 
@@ -22,13 +35,9 @@ FIRST CODING PROJECT, LEARNING FROM SCRATCH
 
 -companies unlock at 10 secretaries
 
--show CpS
+-UI overhaul
 
--reset confirmation prompt
-
--more upgrades!
-
--upgrade overhaul
+-upgrade overhaul!
 
 
 1.0

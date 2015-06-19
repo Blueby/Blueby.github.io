@@ -58,7 +58,7 @@ function resetGame() {
     document.getElementById("secretaryButton").innerHTML = "Hire Secretary (1 CpS): 100 Credits";
     document.getElementById("companyButton").innerHTML = "Requires 10 Secretaries";
     document.getElementById("typeButton").innerHTML = "Upgrade Typewriter (2x): 1000 Credits";
-    document.getElementById("upSecretaryButton").innerHTML = "Requires 25 Secretaries";
+    document.getElementById("upSecretaryButton").innerHTML = "Requires 10 Secretaries";
     credits = 0;
     totalCredits = 0;
     typewriters = 0;
@@ -244,10 +244,11 @@ function updateCreditText() {
     setText(a, (credMil.toFixed(2) + " Million"));
   }
   /* Thousand */
+  /*
   else if (credits >= 1000) {
     var credTh = (credits / 1000);
     setText(a, (credTh.toFixed(2) + " Thousand"));
-  } else {
+  } */else {
     setText(a, credits.toFixed());
   }
 }
@@ -282,7 +283,7 @@ function upTypewriter() {
     var a = document.getElementById("typewriterSpan");
     var b = document.getElementById("creditSpan");
     credits = (credits - typewriterCost);
-    typewriterCost = (typewriterCost * 5);
+    typewriterCost = Math.floor(typewriterCost * 5);
     typewriterEffect();
     setText(a, typewriterMult);
     setText(b, credits);
@@ -310,14 +311,13 @@ var secretaryCost = 100;
 
 function addSecretary() {
   var a = document.getElementById("secretarySpan");
-  var b = document.getElementById("creditSpan");
   if (credits >= secretaryCost) {
     ++secretary;
     credits = (credits - secretaryCost);
-    secretaryCost = (secretaryCost * 1.1);
-    setText(b, credits);
+    secretaryCost = Math.floor(secretaryCost * 1.1);
+    updateCreditText();
     updateSecretaryText();
-    document.getElementById("secretaryButton").innerHTML = "Hire Secretary (1 CpS): " + secretaryCost.toFixed() + " Credits";
+    document.getElementById("secretaryButton").innerHTML = "Hire Secretary (1 CpS): " + secretaryCost + " Credits";
     if (secretary >= 1000000) {
       var secretaryMil = (secretary / 1000000);
       setText(a, (secretaryMil.toFixed(2) + "Mil"));
@@ -338,14 +338,13 @@ var companyCost = 250;
 
 function addCompany() {
   var a = document.getElementById("companySpan");
-  var b = document.getElementById("creditSpan");
   if (credits >= companyCost && secretary >= 10) {
     ++company;
     credits = (credits - companyCost);
-    companyCost = (companyCost * 1.1);
-    setText(b, credits);
+    companyCost = Math.floor(companyCost * 1.1);
+    updateCreditText();
     updateCompanyText();
-    document.getElementById("companyButton").innerHTML = "Buy a Company (10 CpS): " + companyCost.toFixed() + " Credits";
+    document.getElementById("companyButton").innerHTML = "Buy a Company (10 CpS): " + companyCost + " Credits";
     if (company >= 1000000) {
       var companyMil = (company / 1000000);
       setText(a, (companyMil.toFixed(2) + "Mil"));
@@ -359,12 +358,12 @@ function addCompany() {
 }
 
 function updateSecretaryText() {
-  totalSecretaryCPS = (secretaryCPS * secretary);
+  totalSecretaryCPS = (secretaryCPS * secretary) * secretaryEffect;
   document.getElementById("secretarySpanCPS").innerHTML = totalSecretaryCPS;
 }
 
 function updateCompanyText() {
-  totalCompanyCPS = (companyCPS * company);
+  totalCompanyCPS = (companyCPS * company) * companyEffect;
   document.getElementById("companySpanCPS").innerHTML = totalCompanyCPS;
 }
 
@@ -372,6 +371,7 @@ function updateCompanyText() {
 var secretaryUpCost = 2500;
 var secretaryUps = 0;
 var secretaryCPS = 1;
+var secretaryEffect = 1;
 var totalSecretaryCPS = 0;
 var requireSec = 10;
 
@@ -381,11 +381,11 @@ function upSecretary() {
     credits = (credits - secretaryUpCost);
     secretaryUpCost = (secretaryUpCost * 5);
     if (secretaryUps == 1) {
-      secretaryCPS = 2;
+      secretaryEffect = 2;
       requireSec = 50;
       document.getElementById("upSecretaryButton").innerHTML = "Requires 50 Secretaries";
     } else if (secretaryUps >= 2) {
-      secretaryCPS = 4
+      secretaryEffect = 4
       requireSec = 100;
       document.getElementById("upSecretaryButton").innerHTML = "Requires 100 Secretaries";
     }
@@ -396,7 +396,8 @@ function upSecretary() {
 
 var companyUpCost = 5000;
 var companyUps = 0;
-var companyCPS = 1;
+var companyCPS = 10;
+var companyEffect = 1;
 var totalCompanyCPS = 0;
 var requireComp = 10;
 
@@ -406,15 +407,15 @@ function upCompany() {
     credits = (credits - companyUpCost);
     companyUpCost = (companyUpCost * 5);
     if (companyUps == 1) {
-      companyCPS = 2;
+      companyEffect = 2;
       requireComp = 50;
       document.getElementById("upCompanyButton").innerHTML = "Requires 50 Companies";
     } else if (companyUps >= 2) {
-      companyCPS = 4
+      companyEffect = 4
       requireComp = 100;
       document.getElementById("upCompanyButton").innerHTML = "Requires 100 Companies";
     }
-    updateSecretaryText();
+    updateCompanyText();
     document.getElementById("upCompanyButton").innerHTML = "Requires " + requireComp + " Companies";
   }
 }
@@ -429,16 +430,15 @@ function creditCalc() {
 
 function secretaryPS() {
   var secCredits = 0;
-  secCredits = (secretary * secretaryCPS) / 100;
+  secCredits = ((secretary * secretaryCPS) * secretaryEffect) / 100;
   credits = (credits + secCredits);
   totalCredits = (totalCredits + secCredits);
 }
 
-var companyCPS = 10;
 
 function companyPS() {
   var companyCredits = 0;
-  companyCredits = (company * companyCPS) / 100;
+  companyCredits = ((company * companyCPS) * companyEffect) / 100;
   credits = (credits + companyCredits);
   totalCredits = (credits + companyCredits);
 }
