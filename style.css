@@ -3,7 +3,7 @@
   width: 200px;
   font-family: Helvetica;
   position: fixed;
-  left: 400px;
+  left: 398px;
   top: 46px;
   border: 2px solid black;
   padding: 5px;
@@ -15,7 +15,7 @@
   width: 200px;
   font-family: Helvetica;
   position: fixed;
-  left: 400px;
+  left: 398px;
   top: 10px;
   border: 2px solid black;
   padding: 5px;
@@ -27,7 +27,7 @@
   width: 200px;
   font-family: Helvetica;
   position: fixed;
-  left: 400px;
+  left: 398px;
   top: 166px;
   border: 2px solid black;
   padding: 5px;
@@ -39,7 +39,7 @@
   width: 200px;
   font-family: Helvetica;
   position: fixed;
-  left: 400px;
+  left: 398px;
   top: 220px;
   border: 2px solid black;
   padding: 5px;
@@ -51,8 +51,8 @@
   width: 200px;
   font-family: Helvetica;
   position: fixed;
-  left: 400px;
-  top: 280px;
+  left: 398px;
+  top: 274px;
   border: 2px solid black;
   padding: 5px;
   float: left;
@@ -60,10 +60,15 @@
 }
 
 #content {
+  position: fixed;
+  border: 2px solid black;
+  padding: 5px;
+  width: 370px;
+  height: 102px;
   font-family: Helvetica;
-  position: absolute;
   top: 10px;
   left: 10px;
+  background-color: lightpink;
 }
 
 #donate {
@@ -98,28 +103,28 @@
 #typewriter-button {
   position: fixed;
   left: 10px;
-  top: 280px;
+  top: 274px;
   float: left;
 }
 
 #secretaryUpgrade-button {
   position: fixed;
   left: 10px;
-  top: 320px;
+  top: 310px;
   float: left;
 }
 
 #companyUpgrade-button {
   position: fixed;
   left: 10px;
-  top: 360px;
+  top: 346px;
   float: left;
 }
 
 #reset-button {
   position: fixed;
   left: 10px;
-  top: 400px;
+  top: 382px;
   float: left;
 }
 

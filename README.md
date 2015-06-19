@@ -5,6 +5,32 @@ FIRST CODING PROJECT, LEARNING FROM SCRATCH
 #Changelog:
 6/19/15:
 
+1.2
+
+-update UI
+
+-fixed word wrap
+
+
+1.1
+
+-UI overhaul
+
+-code cleanup
+
+-learning css transitions (buttons)
+
+-companies unlock at 10 secretaries
+
+-show CpS
+
+-reset confirmation prompt
+
+-more upgrades!
+
+-upgrade overhaul
+
+
 1.0
 
 -added sound effects
