@@ -8,16 +8,16 @@
 
 <body onload="onLoad();">
   <div id="content">
-    <p id="test">Type: </p>
     <form autocomplete="off" onsubmit="return wordCheck();">
       <input size="48" onkeydown="startSound();" type="text" id="textbox">
     </form>
+    <p id="test">Type: </p>
     <p id="wrongWord"></p>
   </div>
-  
+
   <!-- Credits per second display -->
   <div id="CPS_box">Total CpS: <span id="cpsSpan">0</span></div>
-  
+
   <!-- Credits display -->
   <div id="credits_box">Credits: <span id="creditSpan">0</span></div>
 
@@ -35,35 +35,35 @@
 
   <!-- Typewriter display -->
   <div id="typewriter_box">
-    Current Multiplier: <span id="typewriterSpan">1</span>
+    Typewriter Multiplier: <span id="typewriterSpan">1</span>
   </div>
 
   <div id="credits-button">
-    <a href="#" class="button" onclick="gainCredit();">10,000 Credits (Testing Purposes)</a>
+    <a href="#" class="button" onmouseover="playBlip();" onclick="gainCredit();">10,000 Credits (Testing Purposes)</a>
   </div>
 
   <div id="secretary-button">
-    <a href="#" class="button" onclick="addSecretary();" id="secretaryButton">Hire Secretary (1 CpS): 100 Credits</a>
+    <a href="#" class="button"  onmouseover="playBlip();" onclick="addSecretary();" id="secretaryButton">Hire Secretary (1 CpS): 100 Credits</a>
   </div>
 
   <div id="company-button">
-    <a href="#" class="button" onclick="addCompany();" id="companyButton">Requires 10 Secretaries</a>
+    <a href="#" class="button"  onmouseover="playBlip();" onclick="addCompany();" id="companyButton">Requires 10 Secretaries</a>
   </div>
 
   <div id="typewriter-button">
-    <a href="#" class="button" onclick="upTypewriter();" id="typeButton">Upgrade Typewriter (2x): 1000 Credits</a>
+    <a href="#" class="button"  onmouseover="playBlip();" onclick="upTypewriter();" id="typeButton">Upgrade Typewriter (2x): 1000 Credits</a>
   </div>
 
   <div id="secretaryUpgrade-button">
-    <a href="#" class="button" onclick="upSecretary();" id="upSecretaryButton">Requires 10 Secretaries</a>
+    <a href="#" class="button"  onmouseover="playBlip();" onclick="upSecretary();" id="upSecretaryButton">Requires 10 Secretaries</a>
   </div>
-  
-    <div id="companyUpgrade-button">
-    <a href="#" class="button" onclick="upCompany();" id="upCompanyButton">Requires 10 Companies</a>
+
+  <div id="companyUpgrade-button">
+    <a href="#" class="button"  onmouseover="playBlip();" onclick="upCompany();" id="upCompanyButton">Requires 10 Companies</a>
   </div>
 
   <div id="reset-button">
-    <a href="#" class="button" onclick="resetGame();" id="resetButton">Reset Game</a>
+    <a href="#" class="button"  onmouseover="playBlip();" onclick="resetGame();" id="resetButton">Reset Game</a>
   </div>
 
   <div id="donate"><font size=2>Help feed me so I can keep updating;<br>
@@ -77,6 +77,7 @@ any amount is appreciated!</font>
     </form>
   </div>
 
+  <audio id="blip" src="blip.mp3"></audio>
   <audio id="audio" src="type.mp3"></audio>
   <audio id="audio2" src="type2.mp3"></audio>
   <audio id="audio3" src="type3.mp3"></audio>

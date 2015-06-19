@@ -5,6 +5,14 @@ function onLoad() {
   creditLoad();
 }
 
+function playBlip() {
+  var blip = document.getElementById("blip");
+  blip.volume = .2;
+  blip.pause();
+  blip.currentTime = 0;
+  blip.play();
+}
+
 var typeSound = 1;
 
 function startSound() {

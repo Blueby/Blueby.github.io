@@ -1,16 +1,4 @@
 /* Styles go here */
-#CPS_box {
-  width: 200px;
-  font-family: Helvetica;
-  position: fixed;
-  left: 398px;
-  top: 46px;
-  border: 2px solid black;
-  padding: 5px;
-  float: left;
-  background-color: lightgreen;
-}
-
 #credits_box {
   width: 200px;
   font-family: Helvetica;
@@ -23,12 +11,24 @@
   background-color: lightgreen;
 }
 
+#CPS_box {
+  width: 200px;
+  font-family: Helvetica;
+  position: fixed;
+  left: 398px;
+  top: 46px;
+  border: 2px solid black;
+  padding: 5px;
+  float: left;
+  background-color: lightgreen;
+}
+
 #secretary_box {
   width: 200px;
   font-family: Helvetica;
   position: fixed;
   left: 398px;
-  top: 166px;
+  top: 82px;
   border: 2px solid black;
   padding: 5px;
   float: left;
@@ -40,7 +40,7 @@
   font-family: Helvetica;
   position: fixed;
   left: 398px;
-  top: 220px;
+  top: 136px;
   border: 2px solid black;
   padding: 5px;
   float: left;
@@ -52,7 +52,7 @@
   font-family: Helvetica;
   position: fixed;
   left: 398px;
-  top: 274px;
+  top: 190px;
   border: 2px solid black;
   padding: 5px;
   float: left;
@@ -64,7 +64,7 @@
   border: 2px solid black;
   padding: 5px;
   width: 370px;
-  height: 102px;
+  height: 281px;
   font-family: Helvetica;
   top: 10px;
   left: 10px;
@@ -81,7 +81,7 @@
 #credits-button {
   position: fixed;
   left: 10px;
-  top: 130px;
+  top: 310px;
   float: left;
   background-color: #99CCFF;
 }
@@ -89,42 +89,42 @@
 #secretary-button {
   position: fixed;
   left: 10px;
-  top: 166px;
+  top: 346px;
   float: left;
 }
 
 #company-button {
   position: fixed;
   left: 10px;
-  top: 220px;
+  top: 382px;
   float: left;
 }
 
 #typewriter-button {
   position: fixed;
   left: 10px;
-  top: 274px;
+  top: 418px;
   float: left;
 }
 
 #secretaryUpgrade-button {
   position: fixed;
   left: 10px;
-  top: 310px;
+  top: 454px;
   float: left;
 }
 
 #companyUpgrade-button {
   position: fixed;
   left: 10px;
-  top: 346px;
+  top: 490px;
   float: left;
 }
 
 #reset-button {
   position: fixed;
   left: 10px;
-  top: 382px;
+  top: 526px;
   float: left;
 }
 

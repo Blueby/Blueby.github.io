@@ -5,6 +5,13 @@ FIRST CODING PROJECT, LEARNING FROM SCRATCH
 #Changelog:
 6/19/15:
 
+1.4
+
+-added more sounds
+
+-moved UI again
+
+
 1.3
 
 -fixed various issues
@@ -19,15 +26,11 @@ FIRST CODING PROJECT, LEARNING FROM SCRATCH
 
 1.1
 
-added:
-
 -show CpS
 
 -more upgrades!
 
 -reset confirmation prompt
-
-misc:
 
 -code cleanup
 
@@ -50,7 +53,6 @@ misc:
 1.0
 
 -tinkered with sound effects, can’t figure it out :(
-
 
 -added sentences
 
@@ -95,14 +97,10 @@ misc:
 
 -updated error message
 
-changed:
-
 -you now have to press enter after typing a word
 
 
 1.2 
-
-added:
 
 -error message
 
