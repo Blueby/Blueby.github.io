@@ -63,31 +63,35 @@ function resetGame() {
     setText(b, 0);
     setText(c, 0);
     setText(d, 1);
-    document.getElementById("secretaryButton").innerHTML = "Hire Secretary (1 CpS): 100 Credits";
-    document.getElementById("companyButton").innerHTML = "Requires 10 Secretaries";
-    document.getElementById("typeButton").innerHTML = "Upgrade Typewriter (2x): 1000 Credits";
-    document.getElementById("upSecretaryButton").innerHTML = "Requires 10 Secretaries";
     credits = 0;
     totalCredits = 0;
     typewriters = 0;
-    typewriterCost = 1000;
+    typewriterCost = 250;
+    secretaryUpCost = 100;
+    secretaryUps = 0;
+    secretaryCPS = .5;
     secretary = 0;
     secretaryCost = 100;
     company = 0;
     companyCost = 250;
-    secretaryUpCost = 1000;
-    secretaryUps = 0;
-    secretaryCPS = 1;
+    companyUpCost = 250;
+    companyUps = 0;
+    comppanyCPS = 5;
     totalSecretaryCPS = 0;
+    totalCompanyCPS = 0;
     randWord();
     updateSecretaryText();
     updateCompanyText();
+    document.getElementById("typeButton").innerHTML = "Upgrade Typewriter (2x): " + typewriterCost + " Credits";
+    document.getElementById("upSecretaryButton").innerHTML = "Requires 10 Secretaries";
+    document.getElementById("wrongWord").innerHTML = "";
   }
 }
 
 var wordChoice;
 var wordSelect = "FUCK";
 var result = "FUCK";
+var totalCreditsLost = 0;
 
 function wordCheck() {
   result = document.getElementById("textbox").value;
@@ -96,7 +100,7 @@ function wordCheck() {
     creditAmount();
     updateCreditText();
     credits = (credits + creditValue);
-    totalCredits = totalCredits = creditValue;
+    totalCredits = totalCredits + creditValue;
     document.getElementById("textbox").value = "";
     document.getElementById("wrongWord").innerHTML = "+" + creditValue + " Credits";
     randWord();
@@ -108,8 +112,9 @@ function wordCheck() {
     var wrong = document.getElementById("textbox").value;
     document.getElementById("textbox").value = "";
     creditAmount();
-    var creditsLost = (creditValue * 1.5);
+    var creditsLost = (creditValue * .5);
     credits = credits - creditsLost;
+    totalCreditsLost = totalCreditsLost + creditsLost;
     document.getElementById("wrongWord").innerHTML = "-" + creditsLost + " Credits: You typed " + "\"" + wrong + "\"";
     updateCreditText();
     return false;
@@ -204,7 +209,7 @@ function randWord() {
         wordSelect = "has anyone really been so far even as decided to use even go want to do look more like?";
         break;
       case 5:
-        wordSelect = "ThIs SENtenCe Is teRRiBle t0 Type; wow i Hate this sen3Nce.";
+        wordSelect = "this sentence replaced that godawful one";
         break;
       case 6:
         wordSelect = "ayy lmao this suddenly got really hard";
@@ -235,20 +240,22 @@ var creditValue = 0;
 
 function creditAmount() {
   if (typewriters > 0) {
-    creditValue = ((wordSelect.length * 10) * typewriterMult);
+    creditValue = ((wordSelect.length * 2) * typewriterMult);
   } else {
-    creditValue = (wordSelect.length * 10);
+    creditValue = (wordSelect.length * 2);
   }
 }
 
 function gainCredit() {
-  credits = (credits + 10000);
-  totalCredits = (totalCredits + 10000);
+  credits = (credits + 1000);
+  totalCredits = (totalCredits + 1000);
   updateCreditText();
 }
 
 function updateCreditText() {
   var a = document.getElementById("creditSpan");
+  var b = document.getElementById("totalCESpan");
+  var c = document.getElementById("totalCLSpan");
   /* Billion */
   if (credits >= 1000000000) {
     var credBil = (credits / 1000000000);
@@ -267,6 +274,8 @@ function updateCreditText() {
   } */
   else {
     setText(a, credits.toFixed());
+    setText(b, totalCredits.toFixed());
+    setText(c, totalCreditsLost.toFixed());
   }
 }
 
@@ -292,7 +301,7 @@ function wordUpgrade() {
 /* Typewriter Upgrades */
 
 var typewriters = 0;
-var typewriterCost = 1000;
+var typewriterCost = 250;
 
 function upTypewriter() {
   if (credits >= typewriterCost) {
@@ -300,7 +309,7 @@ function upTypewriter() {
     var a = document.getElementById("typewriterSpan");
     var b = document.getElementById("creditSpan");
     credits = (credits - typewriterCost);
-    typewriterCost = Math.floor(typewriterCost * 5);
+    typewriterCost = Math.floor(typewriterCost * 3.5);
     typewriterEffect();
     setText(a, typewriterMult);
     setText(b, credits);
@@ -334,7 +343,6 @@ function addSecretary() {
     secretaryCost = Math.floor(secretaryCost * 1.1);
     updateCreditText();
     updateSecretaryText();
-    document.getElementById("secretaryButton").innerHTML = "Hire Secretary (1 CpS): " + secretaryCost + " Credits";
     if (secretary >= 1000000) {
       var secretaryMil = (secretary / 1000000);
       setText(a, (secretaryMil.toFixed(2) + "Mil"));
@@ -343,7 +351,7 @@ function addSecretary() {
     }
   }
   if (secretary == 10) {
-    document.getElementById("companyButton").innerHTML = "Buy a Company (10 CpS): 250 Credits";
+    document.getElementById("companyButton").innerHTML = "Buy a Company (" + (companyCPS * companyEffect) + " CpS): 250 Credits";
   }
   if (secretary == requireSec) {
     document.getElementById("upSecretaryButton").innerHTML = "Upgrade Secretary Efficiency (2x): " + secretaryUpCost.toFixed() + " Credits";
@@ -361,7 +369,6 @@ function addCompany() {
     companyCost = Math.floor(companyCost * 1.1);
     updateCreditText();
     updateCompanyText();
-    document.getElementById("companyButton").innerHTML = "Buy a Company (10 CpS): " + companyCost + " Credits";
     if (company >= 1000000) {
       var companyMil = (company / 1000000);
       setText(a, (companyMil.toFixed(2) + "Mil"));
@@ -377,17 +384,24 @@ function addCompany() {
 function updateSecretaryText() {
   totalSecretaryCPS = (secretaryCPS * secretary) * secretaryEffect;
   document.getElementById("secretarySpanCPS").innerHTML = totalSecretaryCPS;
+  document.getElementById("secretaryButton").innerHTML = "Hire Secretary (" + (secretaryCPS * secretaryEffect) + " CpS): " + secretaryCost + " Credits";
+
 }
 
 function updateCompanyText() {
   totalCompanyCPS = (companyCPS * company) * companyEffect;
   document.getElementById("companySpanCPS").innerHTML = totalCompanyCPS;
+  if (secretary >= 10) {
+    document.getElementById("companyButton").innerHTML = "Buy a Company (" + (companyCPS * companyEffect) + " CpS): " + companyCost + " Credits";
+  } else {
+    document.getElementById("companyButton").innerHTML = "Requires 10 Secretaries";
+  }
 }
 
 /* Secretary Upgrades*/
-var secretaryUpCost = 2500;
+var secretaryUpCost = 1000;
 var secretaryUps = 0;
-var secretaryCPS = 1;
+var secretaryCPS = .5;
 var secretaryEffect = 1;
 var totalSecretaryCPS = 0;
 var requireSec = 10;
@@ -399,21 +413,19 @@ function upSecretary() {
     secretaryUpCost = (secretaryUpCost * 5);
     if (secretaryUps == 1) {
       secretaryEffect = 2;
-      requireSec = 50;
-      document.getElementById("upSecretaryButton").innerHTML = "Requires 50 Secretaries";
+      requireSec = 25;
     } else if (secretaryUps >= 2) {
       secretaryEffect = 4
-      requireSec = 100;
-      document.getElementById("upSecretaryButton").innerHTML = "Requires 100 Secretaries";
+      requireSec = 50;
     }
     updateSecretaryText();
     document.getElementById("upSecretaryButton").innerHTML = "Requires " + requireSec + " Secretaries";
   }
 }
 
-var companyUpCost = 5000;
+var companyUpCost = 2500;
 var companyUps = 0;
-var companyCPS = 10;
+var companyCPS = 5;
 var companyEffect = 1;
 var totalCompanyCPS = 0;
 var requireComp = 10;
@@ -425,12 +437,10 @@ function upCompany() {
     companyUpCost = (companyUpCost * 5);
     if (companyUps == 1) {
       companyEffect = 2;
-      requireComp = 50;
-      document.getElementById("upCompanyButton").innerHTML = "Requires 50 Companies";
+      requireComp = 25;
     } else if (companyUps >= 2) {
       companyEffect = 4
-      requireComp = 100;
-      document.getElementById("upCompanyButton").innerHTML = "Requires 100 Companies";
+      requireComp = 50;
     }
     updateCompanyText();
     document.getElementById("upCompanyButton").innerHTML = "Requires " + requireComp + " Companies";
@@ -457,7 +467,7 @@ function companyPS() {
   var companyCredits = 0;
   companyCredits = ((company * companyCPS) * companyEffect) / 100;
   credits = (credits + companyCredits);
-  totalCredits = (credits + companyCredits);
+  totalCredits = (totalCredits + companyCredits);
 }
 
 function creditLoad() {

@@ -78,6 +78,18 @@
   background-color: lightpink;
 }
 
+#stats {
+  position: fixed;
+  border: 2px solid black;
+  padding: 5px;
+  width: 200px;
+  height: 246px;
+  font-family: Helvetica;
+  top: 46px;
+  left: 398px;
+  background-color: orange;
+}
+
 #donate {
   font-family: Helvetica;
   position: fixed;

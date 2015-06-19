@@ -5,6 +5,17 @@ FIRST CODING PROJECT, LEARNING FROM SCRATCH
 #Changelog:
 6/19/15:
 
+1.6
+
+-change penalty to 50% of word value
+
+-reworking credit values
+
+-added stats
+
+-fixed persistent wrong text
+
+
 1.5
 
 -you can't cheat anymore (copy & paste)
