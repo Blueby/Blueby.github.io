@@ -5,6 +5,11 @@ FIRST CODING PROJECT, LEARNING FROM SCRATCH
 #Changelog:
 6/19/15:
 
+1.8
+
+-fix reset game
+
+
 1.7
 
 -fix major issue

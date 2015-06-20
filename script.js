@@ -67,16 +67,22 @@ function resetGame() {
     totalCredits = 0;
     typewriters = 0;
     typewriterCost = 250;
-    secretaryUpCost = 100;
-    secretaryUps = 0;
-    secretaryCPS = .5;
     secretary = 0;
     secretaryCost = 100;
+    secretaryUpCost = 1000;
+    secretaryUps = 0;
+    secretaryCPS = .5;
+    secretaryEffect = 1;
+    totalSecretaryCPS = 0;
+    requireSec = 10;
+    companyUpCost = 2500;
+    companyUps = 0;
+    companyCPS = 5;
+    companyEffect = 1;
+    totalCompanyCPS = 0;
+    requireComp = 10;
     company = 0;
     companyCost = 250;
-    companyUpCost = 250;
-    companyUps = 0;
-    comppanyCPS = 5;
     totalSecretaryCPS = 0;
     totalCompanyCPS = 0;
     randWord();
@@ -84,6 +90,7 @@ function resetGame() {
     updateCompanyText();
     document.getElementById("typeButton").innerHTML = "Upgrade Typewriter (2x): " + typewriterCost + " Credits";
     document.getElementById("upSecretaryButton").innerHTML = "Requires 10 Secretaries";
+    document.getElementById("upCompanyButton").innerHTML = "Requires 10 Companies";
     document.getElementById("wrongWord").innerHTML = "";
   }
 }
